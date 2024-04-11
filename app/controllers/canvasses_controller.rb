@@ -1,6 +1,6 @@
 class CanvassesController < ApplicationController
-  before_action :set_canvass,       only: [:show]
-  before_action :authorize_canvass, only: [:show]
+  before_action :set_canvass,       only: [:show, :destroy]
+  before_action :authorize_canvass, only: [:show, :destroy]
 
   def index
     @canvasses = current_user.canvasses
@@ -13,6 +13,11 @@ class CanvassesController < ApplicationController
     @canvass = Canvass.create(user: current_user)
 
     redirect_to canvass_path(@canvass)
+  end
+
+  def destroy
+    @canvass.destroy
+    redirect_back fallback_location: canvasses_path
   end
 
   private

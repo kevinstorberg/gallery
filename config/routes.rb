@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   # get "/canvasses"         => "canvasses#index",  as: :canvasses
   # post "/canvasses/create" => "canvasses#create", as: :create_canvass
-  resources :canvasses
+  resources :canvasses, except: [:new, :edit]
 end

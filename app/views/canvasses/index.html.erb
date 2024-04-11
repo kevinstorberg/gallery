@@ -6,9 +6,9 @@
   <ul>
     <% @canvasses.each do |canvass| %>
       <% if canvass.name.present? %>
-        <li><%= link_to canvass.name, canvass_path(canvass) %></li>
+        <li><%= link_to canvass.name, canvass_path(canvass) %> | <%= link_to 'Delete', canvass, data: { "turbo-method": :delete } %></li>
       <% else %>
-        <li><%= link_to "Unnamed Canvass", canvass_path(canvass) %></li>
+        <li><%= link_to "Unnamed Canvass", canvass_path(canvass) %> | <%= link_to 'Delete', canvass, data: { "turbo-method": :delete } %></li>
       <% end %>
     <% end %>
   </ul>
