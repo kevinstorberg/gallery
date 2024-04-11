@@ -1,0 +1,12 @@
+<div data-controller="contents">
+  <div style="padding: 8px; z-index: 10000; position: relative;">
+    <%= form_with model: @canvass, local: true do |form| %>
+      <%= form.text_field :name, placeholder: "My Canvass . . .", style: "height: 25px; width: 300px;" %>
+    <% end %>
+    <p>Double click to add content<p>
+    <button data-action="contents#addContent">Add Content</button>
+    <button data-action="contents#clearCanvass">Clear Canvass</button>
+  </div>
+
+  <div id="contentArea" data-contents-target="area" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;"></div>
+</div>

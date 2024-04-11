@@ -1,0 +1,17 @@
+<%= form_with model: Canvass.new, local: true do |form| %>
+  <h1><%= form.submit "New Canvass" %></h1>
+<% end %>
+
+<% if @canvasses.any? %>
+  <ul>
+    <% @canvasses.each do |canvass| %>
+      <% if canvass.name.present? %>
+        <li><%= link_to canvass.name, canvass_path(canvass) %></li>
+      <% else %>
+        <li><%= link_to "Unnamed Canvass", canvass_path(canvass) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% else %>
+  <h3>You do not have any canvasses yet</h3>
+<% end %>
