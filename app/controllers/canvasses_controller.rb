@@ -1,6 +1,6 @@
 class CanvassesController < ApplicationController
-  before_action :set_canvass,       only: [:show, :destroy]
-  before_action :authorize_canvass, only: [:show, :destroy]
+  before_action :set_canvass,       only: [:show, :destroy, :contents, :clear]
+  before_action :authorize_canvass, only: [:show, :destroy, :contents, :clear]
 
   def index
     @canvasses = current_user.canvasses
@@ -17,6 +17,18 @@ class CanvassesController < ApplicationController
 
   def destroy
     @canvass.destroy
+    redirect_back fallback_location: canvasses_path
+  end
+
+  def contents
+    @contents = @canvass.contents
+
+    render json: { contents: @contents }, content_type: 'application/json', status: 200
+  end
+
+  def clear
+    @canvass.contents.destroy_all
+
     redirect_back fallback_location: canvasses_path
   end
 

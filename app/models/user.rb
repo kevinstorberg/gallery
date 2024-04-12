@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :canvasses, dependent: :destroy
+  has_many :contents, through: :canvasses
 end

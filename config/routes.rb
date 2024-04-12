@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
-  # get "/canvasses"         => "canvasses#index",  as: :canvasses
-  # post "/canvasses/create" => "canvasses#create", as: :create_canvass
-  resources :canvasses, except: [:new, :edit]
+  resources :canvasses, except: [:new, :edit] do
+    member do
+      get :contents
+      post :clear
+    end
+  end
+
+  resources :contents,  except: [:index, :new, :edit]
 end
