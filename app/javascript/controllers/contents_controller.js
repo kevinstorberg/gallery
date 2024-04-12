@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 import axios from 'axios'
 
 export default class extends Controller {
-  static targets = ["area"]
+  static targets = ["area", "name"]
 
   connect() {
     this.setupAxiosCSRF();
@@ -54,6 +54,22 @@ export default class extends Controller {
       area.appendChild(div);
       this.initializeDragAndResize(div);
     });
+  }
+
+  updateName(event) {
+    clearTimeout(this.timeout); // Clear existing timeout
+    this.timeout = setTimeout(() => {
+      this.saveName();
+    }, 2000); // Set a new timeout for 2 seconds
+  }
+
+  saveName() {
+    const name = this.nameTarget.value;
+    axios.patch(`/canvasses/${this.canvassId}`, {
+      canvass: { name: name }
+    })
+    .then(response => console.log("Name updated successfully"))
+    .catch(error => console.error("Error updating name:", error));
   }
 
   async addContent() {
